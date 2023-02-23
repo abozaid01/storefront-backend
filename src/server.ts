@@ -4,6 +4,8 @@ import morgan from 'morgan';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
 import errorMiddleware from './middlware/error.middlware';
+import config from './middlware/config';
+import db from './database';
 
 app.use(morgan('dev'));
 app.use(helmet());
@@ -15,6 +17,24 @@ app.use(
         message: 'To many request, send back request after 3 minutes',
     })
 );
+
+//test database connection
+db.connect()
+    .then((client) => {
+        return client
+            .query('SELECT NOW()')
+            .then((res) => {
+                client.release();
+                console.log(res.rows);
+            })
+            .catch((err) => {
+                client.release();
+                console.log(err.stack);
+            });
+    })
+    .catch((err) => {
+        console.log(err);
+    });
 
 app.get('/', (req: Request, res: Response) => {
     throw new Error();
@@ -31,8 +51,8 @@ app.use((_req: Request, res: Response) => {
     });
 });
 
-const PORT = 3000;
-app.listen(PORT, () => {
+const port = config.port || 3000;
+app.listen(port, () => {
     console.log('listening on port 3000');
 });
 
