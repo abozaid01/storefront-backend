@@ -1,27 +1,36 @@
 {
-  "name": "storefront-backend",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "dev": "nodemon src/server.ts",
-    "build": "tsc",
-    "start": "npm run build && node dist/server.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/abozaid01/storefront-backend.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/abozaid01/storefront-backend/issues"
-  },
-  "homepage": "https://github.com/abozaid01/storefront-backend#readme",
-  "devDependencies": {
-    "nodemon": "^2.0.20",
-    "ts-node": "^10.9.1",
-    "typescript": "^4.9.5"
-  }
+    "name": "storefront-backend",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "dev": "nodemon src/server.ts",
+        "build": "tsc",
+        "start": "npm run build && node dist/server.js",
+        "format": "prettier --write src/**/*.ts",
+        "lint": "eslint src/**/*.ts",
+        "lint-fix": "eslint src/**/*.ts --fix"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/abozaid01/storefront-backend.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/abozaid01/storefront-backend/issues"
+    },
+    "homepage": "https://github.com/abozaid01/storefront-backend#readme",
+    "devDependencies": {
+        "@typescript-eslint/eslint-plugin": "^5.53.0",
+        "@typescript-eslint/parser": "^5.53.0",
+        "eslint": "^8.34.0",
+        "eslint-config-prettier": "^8.6.0",
+        "eslint-plugin-prettier": "^4.2.1",
+        "nodemon": "^2.0.20",
+        "prettier": "^2.8.4",
+        "ts-node": "^10.9.1",
+        "typescript": "^4.9.5"
+    }
 }
