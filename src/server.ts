@@ -6,6 +6,7 @@ import rateLimit from 'express-rate-limit';
 import errorMiddleware from './middlware/error.middlware';
 import config from './middlware/config';
 import db from './database';
+import routes from './routes';
 
 app.use(morgan('dev'));
 app.use(helmet());
@@ -17,6 +18,7 @@ app.use(
         message: 'To many request, send back request after 3 minutes',
     })
 );
+app.use('/api', routes);
 
 //test database connection
 db.connect()
