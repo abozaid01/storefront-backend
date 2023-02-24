@@ -6,6 +6,6 @@ CREATE TABLE users(
     user_name VARCHAR(30) NOT NULL,
     first_name VARCHAR(30) NOT NULL,
     last_name VARCHAR(30) NOT NULL,
-    password  VARCHAR(50) NOT NULL
+    password  VARCHAR(250) NOT NULL
 );
 --ALTER SEQUENCE users_id_seq RESTART WITH 1;
