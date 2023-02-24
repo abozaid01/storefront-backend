@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import UserModel from '../models/user.model';
-import config from '../middlware/config';
+import config from '../middleware/config';
 import jwt from 'jsonwebtoken';
 
 const userModel = new UserModel();
@@ -67,7 +67,7 @@ const update = async (req: Request, res: Response, next: NextFunction) => {
 const deleteUser = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const user = await userModel.deleteUser(
-            req.params.id as unknown as number
+            req.params.id as unknown as string
         );
         res.json({
             status: 'success',

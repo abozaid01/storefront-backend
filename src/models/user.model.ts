@@ -1,6 +1,6 @@
 import db from '../database';
 import User from '../types/user.type';
-import config from '../middlware/config';
+import config from '../middleware/config';
 import bcrypt from 'bcrypt';
 
 const hash = async (password: string) => {
@@ -115,7 +115,7 @@ class UserModel {
     }
 
     //delete user
-    async deleteUser(id: number): Promise<User> {
+    async deleteUser(id: string): Promise<User> {
         try {
             //opn connection
             const conn = await db.connect();

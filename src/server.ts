@@ -3,8 +3,8 @@ const app: Application = express();
 import morgan from 'morgan';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
-import errorMiddleware from './middlware/error.middlware';
-import config from './middlware/config';
+import errorMiddleware from './middleware/error.middlware';
+import config from './middleware/config';
 import db from './database';
 import routes from './routes';
 
@@ -39,7 +39,7 @@ db.connect()
     });
 
 app.get('/', (req: Request, res: Response) => {
-    throw new Error();
+    //throw new Error();
     res.send('hello');
 });
 

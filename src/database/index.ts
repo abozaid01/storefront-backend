@@ -1,5 +1,5 @@
 import { Pool } from 'pg';
-import config from '../middlware/config';
+import config from '../middleware/config';
 
 const pool = new Pool({
     host: config.host,
