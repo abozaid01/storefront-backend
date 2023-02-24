@@ -1,14 +1,17 @@
 import { Router } from 'express';
 import * as userController from '../../controllers/user.controller';
-
+import validateMiddleware from '../../middlware/authenticate.middlware';
 const routes = Router();
 
-routes.route('/').get(userController.getAll).post(userController.create);
+routes
+    .route('/')
+    .get(validateMiddleware, userController.getAll)
+    .post(userController.create);
 routes
     .route('/:id')
-    .get(userController.getUser)
-    .patch(userController.update)
-    .delete(userController.deleteUser);
+    .get(validateMiddleware, userController.getUser)
+    .patch(validateMiddleware, userController.update)
+    .delete(validateMiddleware, userController.deleteUser);
 
 //authentication
 routes.route('/auth').post(userController.auth);
