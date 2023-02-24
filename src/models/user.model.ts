@@ -1,5 +1,12 @@
 import db from '../database';
 import User from '../types/user.type';
+import config from '../middlware/config';
+import bcrypt from 'bcrypt';
+
+const hashPassword = async (password: string) => {
+    const salt = parseInt(config.salt as string, 10);
+    return await bcrypt.hash(`${password}${config.pepper}`, salt);
+};
 
 class UserModel {
     //create new user
@@ -15,7 +22,7 @@ class UserModel {
                 user.user_name,
                 user.first_name,
                 user.last_name,
-                user.password,
+                hashPassword(user.password),
             ]);
 
             //close connection
@@ -89,7 +96,7 @@ class UserModel {
                 user.user_name,
                 user.first_name,
                 user.last_name,
-                user.password,
+                hashPassword(user.password),
                 user.id,
             ]);
 
