@@ -13,10 +13,10 @@ let token: string = '';
 describe('Test Orders API Endpoints', () => {
     beforeAll(async () => {
         const user = {
-            email: 'gouda@h.com',
-            user_name: 'hos',
-            first_name: 'Hossam',
-            last_name: 'Gouda',
+            email: 'mo@gmial.com',
+            user_name: 'mo',
+            first_name: 'Mohamed ',
+            last_name: 'Ahmed',
             password: '321',
         } as User;
 
@@ -35,18 +35,18 @@ describe('Test Orders API Endpoints', () => {
     describe('Test Authenticate method', () => {
         it('should be able to authenticate to get token', async () => {
             const res = await request
-                .post('/api/users/auth')
+                .post('/api/user/auth')
                 .set('Content-type', 'application/json')
                 .set('Authorization', `Bearer ${token}`)
 
                 .send({
-                    email: 'gouda@h.com',
+                    email: 'mo@gmial.com',
                     password: '321',
                 });
             expect(res.status).toBe(200);
             const { id, email, token: userToken } = res.body.data;
             expect(id).toBe(1);
-            expect(email).toBe('gouda@h.com');
+            expect(email).toBe('mo@gmial.com');
             token = userToken;
         });
     });
@@ -54,7 +54,7 @@ describe('Test Orders API Endpoints', () => {
     describe('Test CRUD API methods', () => {
         it('should create new Product item', async () => {
             const res = await request
-                .post('/api/orders')
+                .post('/api/order/')
                 .set('Content-type', 'application/json')
                 .send({
                     status: 'active',
@@ -67,7 +67,7 @@ describe('Test Orders API Endpoints', () => {
 
         it('should get list of orders in the DB', async () => {
             const res = await request
-                .get('/api/orders/')
+                .get('/api/order//')
                 .set('Content-type', 'application/json')
                 .set('Authorization', `Bearer ${token}`);
             expect(res.status).toBe(200);
@@ -76,7 +76,7 @@ describe('Test Orders API Endpoints', () => {
 
         it('should get target order info', async () => {
             const res = await request
-                .get('/api/orders/1')
+                .get('/api/order//1')
                 .set('Content-type', 'application/json')
                 .set('Authorization', `Bearer ${token}`);
             expect(res.status).toBe(200);
@@ -84,7 +84,7 @@ describe('Test Orders API Endpoints', () => {
 
         it('should get order info for current user', async () => {
             const res = await request
-                .get('/api/orders/1')
+                .get('/api/order//1')
                 .set('Content-type', 'application/json')
                 .set('Authorization', `Bearer ${token}`);
             expect(res.status).toBe(200);
@@ -92,7 +92,7 @@ describe('Test Orders API Endpoints', () => {
 
         it('should update the target order informations', async () => {
             const res = await request
-                .patch('/api/orders/1')
+                .patch('/api/order//1')
                 .set('Content-type', 'application/json')
                 .set('Authorization', `Bearer ${token}`)
                 .send({
@@ -104,7 +104,7 @@ describe('Test Orders API Endpoints', () => {
 
         it('should delete order', async () => {
             const res = await request
-                .delete('/api/orders/1')
+                .delete('/api/order//1')
                 .set('Content-type', 'application/json')
                 .set('Authorization', `Bearer ${token}`);
             expect(res.status).toBe(200);
