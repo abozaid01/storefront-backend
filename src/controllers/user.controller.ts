@@ -37,7 +37,7 @@ const getAll = async (req: Request, res: Response, next: NextFunction) => {
 const getUser = async (req: Request, res: Response, next: NextFunction) => {
     try {
         //get specific user
-        const user = await userModel.getOne(req.params.id as unknown as string);
+        const user = await userModel.getOne(req.params.id as unknown as number);
         res.json({
             status: 'success',
             data: user,
@@ -67,7 +67,7 @@ const update = async (req: Request, res: Response, next: NextFunction) => {
 const deleteUser = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const user = await userModel.deleteUser(
-            req.params.id as unknown as string
+            req.params.id as unknown as number
         );
         res.json({
             status: 'success',

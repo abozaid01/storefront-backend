@@ -75,7 +75,7 @@ describe('Test User Model', () => {
         });
 
         it('Get user method should return ab when called with ID', async () => {
-            const retrieved = await userModel.getOne(user.id as string);
+            const retrieved = await userModel.getOne(user.id as number);
             expect(retrieved.id).toBe(user.id);
             expect(retrieved.email).toBe(user.email);
             expect(retrieved.user_name).toBe(user.user_name);
@@ -98,7 +98,7 @@ describe('Test User Model', () => {
         });
 
         it('Delete user method should delete user from DB', async () => {
-            const deletedUser = await userModel.deleteUser(user.id as string);
+            const deletedUser = await userModel.deleteUser(user.id as number);
             expect(deletedUser.id).toBe(user.id);
         });
     });

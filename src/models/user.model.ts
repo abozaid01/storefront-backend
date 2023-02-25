@@ -61,7 +61,7 @@ class UserModel {
     }
 
     //get specific user
-    async getOne(id: string): Promise<User> {
+    async getOne(id: number): Promise<User> {
         try {
             //opn connection
             const conn = await db.connect();
@@ -115,7 +115,7 @@ class UserModel {
     }
 
     //delete user
-    async deleteUser(id: string): Promise<User> {
+    async deleteUser(id: number): Promise<User> {
         try {
             //opn connection
             const conn = await db.connect();
