@@ -8,22 +8,32 @@ These are the notes from a meeting with the frontend developer that describe wha
 
 #### Products
 
--   Index
--   Show
--   Create [token required]
--   [OPTIONAL] Top 5 most popular products
--   [OPTIONAL] Products by category (args: product category)
+-   Index : `'/products' [GET]`
+-   Show : `'/products/:id' [GET]`
+-   Create [token required] : `'/products' [POST]`
+-   Delete [token required] : `'/products/:id' [DELETE]`
 
 #### Users
 
--   Index [token required]
--   Show [token required]
--   Create N[token required]
+-   Index [token required] : `'/users' [GET]`
+-   Show [token required] : `'/users/:id' [GET]`
+-   Create [token required] : `'/users' [POST]`
+-   Authenticate (args: username, password) [token required] : `'/auth' [GET]`
+-   AddProductToOrder (args: orderId, productId, quantity) [token required]: `'/users/:id/add-product-to-order' [POST]`
+-   RemoveProductFromOrder (args: orderId, productId) [token required] `'/users/:id/remove-product-from-order' [DELETE]`
 
 #### Orders
 
--   Current Order by user (args: user id)[token required]
--   [OPTIONAL] Completed Orders by user (args: user id)[token required]
+-   Create (args: userId) [token required] : `'/orders' [POST]`
+-   UpdateStatus (args: userId) [token required]: `'/orders' [PUT]`
+-   Active Order by user (args: user id) [token required] : `'orders/users/:userId/active' [GET]`
+-   Completed Orders by user (args: user id) [token required] `'orders/users/:userId/completed' [GET]`
+
+<!-- TBD
+### Dashboard
+- [OPTIONAL] Top 5 most popular products  : `/top-five-products' [GET]`
+- [OPTIONAL] Products by category (args: product category) : `'/products-in-category'[GET]`
+-->
 
 ## Data Shapes
 
@@ -32,19 +42,58 @@ These are the notes from a meeting with the frontend developer that describe wha
 -   id
 -   name
 -   price
--   [OPTIONAL] category
+-   category
+-   rating
+
+| Column   |        Type        |
+| -------- | :----------------: |
+| id       | SERIAL PRIMARY KEY |
+| name     |      VARCHAR       |
+| price    |      INTEGER       |
+| category |      VARCHAR       |
+| rating   | NUMERIC(3,2) MAX 5 |
 
 #### User
 
 -   id
+-   username
 -   firstName
 -   lastName
 -   password
 
+| Column    |        Type        |
+| --------- | :----------------: |
+| id        | SERIAL PRIMARY KEY |
+| username  |   VARCHAR UNIQUE   |
+| firstName |      VARCHAR       |
+| lastName  |      VARCHAR       |
+| password  |      VARCHAR       |
+
 #### Orders
 
 -   id
--   id of each product in the order
--   quantity of each product in the order
 -   user_id
 -   status of order (active or complete)
+
+| Column        |            Type            |
+| ------------- | :------------------------: |
+| id            |     SERIAL PRIMARY KEY     |
+| userId        |    FOREIGN KEY to USERS    |
+| currentStatus | ENUM ('active','complete') |
+
+Since an order has many products and a product can be in many orders, we need a join
+table to represent this N:N relationship.
+
+##### Order_details
+
+-   id
+-   id of product
+-   quantity of product
+-   id of order to which the product has been added
+
+| Column    |          Type           |
+| --------- | :---------------------: |
+| id        |   SERIAL PRIMARY KEY    |
+| productId | FOREIGN KEY to PRODUCTS |
+| quantity  |         INTEGER         |
+| orderId   |  FOREIGN KEY to ORDERS  |
