@@ -45,7 +45,7 @@ describe('Test Orders API Endpoints', () => {
                 });
             expect(res.status).toBe(200);
             const { id, email, token: userToken } = res.body.data;
-            expect(id).toBe(1);
+            expect(id).toBe(3);
             expect(email).toBe('mo@gmial.com');
             token = userToken;
         });
@@ -55,19 +55,19 @@ describe('Test Orders API Endpoints', () => {
         it('should create new Product item', async () => {
             const res = await request
                 .post('/api/order/')
-                .set('Content-type', 'application/json')
+                .set('Authorization', `Bearer ${token}`)
                 .send({
                     status: 'active',
-                    user_id: 1,
+                    user_id: 3,
                 });
             expect(res.status).toBe(200);
             const { user_id } = res.body.data;
-            expect(user_id).toBe('1');
+            expect(user_id).toBe(3);
         });
 
         it('should get list of orders in the DB', async () => {
             const res = await request
-                .get('/api/order//')
+                .get('/api/order/')
                 .set('Content-type', 'application/json')
                 .set('Authorization', `Bearer ${token}`);
             expect(res.status).toBe(200);
@@ -76,7 +76,7 @@ describe('Test Orders API Endpoints', () => {
 
         it('should get target order info', async () => {
             const res = await request
-                .get('/api/order//1')
+                .get('/api/order/1')
                 .set('Content-type', 'application/json')
                 .set('Authorization', `Bearer ${token}`);
             expect(res.status).toBe(200);
@@ -84,7 +84,7 @@ describe('Test Orders API Endpoints', () => {
 
         it('should get order info for current user', async () => {
             const res = await request
-                .get('/api/order//1')
+                .get('/api/order/1')
                 .set('Content-type', 'application/json')
                 .set('Authorization', `Bearer ${token}`);
             expect(res.status).toBe(200);
@@ -92,19 +92,19 @@ describe('Test Orders API Endpoints', () => {
 
         it('should update the target order informations', async () => {
             const res = await request
-                .patch('/api/order//1')
+                .put('/api/order/1')
                 .set('Content-type', 'application/json')
                 .set('Authorization', `Bearer ${token}`)
                 .send({
                     status: 'active',
-                    user_id: 1,
+                    user_id: 3,
                 });
             expect(res.status).toBe(200);
         });
 
         it('should delete order', async () => {
             const res = await request
-                .delete('/api/order//1')
+                .delete('/api/order/1')
                 .set('Content-type', 'application/json')
                 .set('Authorization', `Bearer ${token}`);
             expect(res.status).toBe(200);
