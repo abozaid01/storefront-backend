@@ -2,7 +2,7 @@
 
 # Storefront project UDacity Nanodgree.
 
-This is a part of Udacity Nanodgree Course for developing a backend server with the Following technologies (Postgres,db-migrate , dotenv , express, jsonwebtoken , Node js , TypeScript ,Jasmine Unite Test, supertest )
+This is a part of Udacity Nanodgree Course for developing a backend server with the Following technologies (Postgres,db-migrate , dotenv , express, jsonwebtoken , Node js , TypeScript ,Jasmine Unit Test, supertest )
 
 1-`yarn` or `npm install` to insatll project dependencies.
 2- yarn dev to start the server on port 5555
@@ -25,6 +25,10 @@ BCRYPT_PASSWORD=secret,
 SALT_ROUNDS=10,
 TOKEN_SECRET=secret-token
 ```
+
+---
+
+## Setup
 
 To make sure the API can connect to the db it is necessary to create a `database.json` file with the following format
 
@@ -49,51 +53,19 @@ To make sure the API can connect to the db it is necessary to create a `database
 }
 ```
 
-## Token and Authentication
+### Database config
 
-added as a middle ware and passed to requested routes to authenticated.
+The API connects to a postgres database. As a first step, it is necessary to create two databases (development and test) on your local machine. Run the command `psql -U postgres -d postgres` in terminal to open the postgres CLI. after entering `your password` to make sure you are connected to your physical database
 
-## innitaing the databases in dev mode
+### Migration
 
-npx migrate up
+`npm i db-migrate migrate-pg`
 
-Available endpoints are (products ,users , orders)
+`npx db-migrate create users-table --sql-file`
 
-# API Endpoints
+# Database Schema
 
-#### Users
-
--   Index [token required]: `'users/' [GET] (token)`
--   Show [token required]: `'users/:id' [GET] (token)`
--   Create (args: User)[token required]: `'users/' [POST] (token)`
--   Update order (args: new user data)[token required]: `'users/:id [PATCH] (token)`
--   Delete [token required]: `'users/:id' [DELETE] (token)`
-
-#### Products
-
--   Index: `'products/' [GET]`
--   Show: `'products/:id' [GET]`
--   Create (args: Product)[token required]: `'products/' [POST] (token)`
--   Update order (args: new order data)[token required]: `'products/:id [PATCH] (token)`
--   Delete: `'products/:id [DELETE]`
-
-#### Orders
-
--   Index [token required]: `'orders/' [GET] (token)`
--   Create [token required]: `'orders/' [POST] (token)`
--   Show Order by user [token required]: `'orders/:id' [GET] (token)`
--   Update order [token required]: `'orders/:id [PUT] (token)`
--   Delete [token required]: `'orders/:id [DELETE] (token)`
-
-### Order-Products
-
--   Create [token required]: `'/order-products/orders/:id/products' [POST] (token)`
--   Index [token required]: `'order-products/orders/:id/products/:id' [GET] (token)`
--   Show Order by user [token required]: `'order-products/orders/:id/products/:id' [GET] (token)`
--   Update order [token required]: `'order-products/orders/:id/products/:id' [PATCH] (token)`
-    -Delete [token required]: `'order-products/orders/:id/products/:id' [DELETE] (token)`
-
-# Databas Schema
+implement the schema in sql files
 
 ### Users Schema
 
@@ -145,59 +117,50 @@ CREATE TABLE order_products (
 );
 ```
 
-## Data Shapes
+`npx db-migrate up` to create the table in the physical database
 
-### User
+and then you can start development with `npm run dev` or testing with `npm run test`
 
-```typescript
-type User = {
-    id?: number;
-    email: string;
-    user_name: string;
-    first_name: string;
-    last_name: string;
-    password: string;
-};
-```
+## innitaing the databases in dev mode
 
-### Product
+npx migrate up
 
-```typescript
-type Product = {
-    id?: number;
-    name: string;
-    description: string;
-    price: number;
-    category: string;
-};
-```
+Available endpoints are (products ,users , orders)
 
-### Order
+## Token and Authentication
 
-```typescript
-type Order = {
-    id?: number;
-    status: string;
-    user_id: number;
-};
-```
+added as a middle ware and passed to requested routes to authenticated.
 
-### Order Product
+# API Endpoints
 
-```typescript
-type OrderProduct = {
-    id?: number;
-    quantity: number;
-    orderId: string;
-    productId: string;
-    products?: Product[];
-};
-```
+#### Users
 
-# Testing
+-   Index [token required]: `'users/' [GET] (token)`
+-   Show [token required]: `'users/:id' [GET] (token)`
+-   Create (args: User)[token required]: `'users/' [POST] (token)`
+-   Update order (args: new user data)[token required]: `'users/:id [PATCH] (token)`
+-   Delete [token required]: `'users/:id' [DELETE] (token)`
 
-The test command `npm run test` will build the schema and test the comiled files in the build/src.
+#### Products
 
-## Testing commad
+-   Index: `'products/' [GET]`
+-   Show: `'products/:id' [GET]`
+-   Create (args: Product)[token required]: `'products/' [POST] (token)`
+-   Update order (args: new order data)[token required]: `'products/:id [PATCH] (token)`
+-   Delete: `'products/:id [DELETE]`
 
-`npm run test`
+#### Orders
+
+-   Index [token required]: `'orders/' [GET] (token)`
+-   Create [token required]: `'orders/' [POST] (token)`
+-   Show Order by user [token required]: `'orders/:id' [GET] (token)`
+-   Update order [token required]: `'orders/:id [PUT] (token)`
+-   Delete [token required]: `'orders/:id [DELETE] (token)`
+
+### Order-Products
+
+-   Create [token required]: `'/order-products/orders/:id/products' [POST] (token)`
+-   Index [token required]: `'order-products/orders/:id/products/:id' [GET] (token)`
+-   Show Order by user [token required]: `'order-products/orders/:id/products/:id' [GET] (token)`
+-   Update order [token required]: `'order-products/orders/:id/products/:id' [PATCH] (token)`
+    -Delete [token required]: `'order-products/orders/:id/products/:id' [DELETE] (token)`

@@ -11,6 +11,6 @@ routes
     .route('/:id')
     .get(controllers.getoneProduct)
     .put(validateMiddleware, controllers.updateProduct)
-    .delete(controllers.deleteProduct);
+    .delete(validateMiddleware, controllers.deleteProduct);
 
 export default routes;
