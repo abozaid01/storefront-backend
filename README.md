@@ -32,17 +32,19 @@ To make sure the API can connect to the db it is necessary to create a `database
 {
     "dev": {
         "driver": "pg",
-        "host": "127.0.0.1",
-        "database": "storefront",
-        "user": "storefront_user",
-        "password": "YOUR_PASSWORD_HERE"
+        "host": { "ENV": "POSTGRES_HOST" },
+        "port": { "ENV": "POSTGRES_PORT" },
+        "database": { "ENV": "POSTGRES_DATABASE" },
+        "user": { "ENV": "POSTGRES_USER" },
+        "password": { "ENV": "POSTGRES_PASSWORD" }
     },
     "test": {
         "driver": "pg",
-        "host": "127.0.0.1",
-        "database": "storefront_test",
-        "user": "storefront_user",
-        "password": "YOUR_PASSWORD_HERE"
+        "host": { "ENV": "POSTGRES_HOST" },
+        "port": { "ENV": "POSTGRES_PORT" },
+        "database": { "ENV": "POSTGRES_DATABASE_TEST" },
+        "user": { "ENV": "POSTGRES_USER" },
+        "password": { "ENV": "POSTGRES_PASSWORD" }
     }
 }
 ```
