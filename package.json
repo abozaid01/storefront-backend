@@ -8,7 +8,6 @@
         "build": "tsc",
         "migrate-run": "db-migrate up",
         "test": "set NODE_ENV=test && db-migrate up --env test && tsc && jasmine && db-migrate reset",
-        "test-mac": "export ENV=test && db-migrate up --env test && tsc && jasmine && db-migrate reset",
         "start": "npm run build && node dist/server.js",
         "format": "prettier --write src/**/*.ts",
         "lint": "eslint src/**/*.ts",
