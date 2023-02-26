@@ -49,7 +49,6 @@ describe('Order Product Model', () => {
         } as Product;
 
         const order = {
-            user_id: 1,
             status: 'active',
         } as Order;
 
@@ -61,7 +60,8 @@ describe('Order Product Model', () => {
 
         beforeAll(async () => {
             // setup user/product to test with
-            await userModel.create(user);
+            const createdUser = await userModel.create(user);
+            order.user_id = createdUser.id;
             await productModel.createProduct(product);
             await orderModel.createOrder(order);
         });

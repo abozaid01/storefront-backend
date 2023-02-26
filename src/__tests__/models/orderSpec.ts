@@ -29,25 +29,30 @@ describe('Order Model', () => {
         });
     });
 
+    const user = {
+        email: 'any@any.com',
+        user_name: 'Mo',
+        first_name: 'Mohamed',
+        last_name: 'Ahmed',
+        password: '321',
+    } as User;
+
+    const product = {
+        name: 'any',
+        description: 'lims',
+        price: 3,
+        category: 'fruit',
+    } as Product;
+
+    const order = {
+        status: 'active',
+    } as Order;
+
     describe('Test Model logic', () => {
         beforeAll(async () => {
-            const user = {
-                email: 'any@any.com',
-                user_name: 'hos',
-                first_name: 'Hossam',
-                last_name: 'Gouda',
-                password: '321',
-            } as User;
-
-            const product = {
-                name: 'any',
-                description: 'lims',
-                price: 3,
-                category: 'fruit',
-            } as Product;
-
             // create user/product to test with order model
-            await userModel.create(user);
+            const createdUser = await userModel.create(user);
+            order.user_id = createdUser.id;
             await productModel.createProduct(product);
         });
 
@@ -58,11 +63,6 @@ describe('Order Model', () => {
             await connection.query(sql);
             connection.release();
         });
-
-        const order = {
-            user_id: 5,
-            status: 'active',
-        } as Order;
 
         it('Create method should create an order', async () => {
             const createdOrder = await orderModel.createOrder(order);
@@ -82,7 +82,7 @@ describe('Order Model', () => {
         it('Edit method should return an order with edited attributes', async () => {
             const returnedOrder = await orderModel.updateOrder({
                 id: 1,
-                user_id: 1,
+                user_id: order.user_id,
                 status: 'completed',
             });
             expect(returnedOrder.status).toBe('completed');
