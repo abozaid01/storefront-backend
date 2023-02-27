@@ -2,13 +2,13 @@
 
 # Storefront project UDacity Nanodgree.
 
-This is a part of Udacity Nanodgree Course for developing a backend server with the Following technologies (Postgres,db-migrate , dotenv , express, jsonwebtoken , Node js , TypeScript ,Jasmine Unit Test, supertest )
+This is a part of Udacity Nanodgree for developing a backend server with the Following technologies (Postgres,db-migrate , dotenv , express, jsonwebtoken , Node js , TypeScript ,Jasmine Unit Test, supertest )
 
 1-`yarn` or `npm install` to insatll project dependencies.
-2- yarn dev to start the server on port 5555
+2- `npm run dev` to start the server on port 5555
 3- Env Variables as the following :
 
-# ENV VARIABLES EXAMPLES
+## ENV VARIABLES EXAMPLES
 
 ```
 PORT=555
@@ -53,7 +53,7 @@ To make sure the API can connect to the db it is necessary to create a `database
 }
 ```
 
-### Database config
+### Database configuration
 
 The API connects to a postgres database. As a first step, it is necessary to create two databases (development and test) on your local machine. Run the command `psql -U postgres -d postgres` in terminal to open the postgres CLI. after entering `your password` to make sure you are connected to your physical database
 
@@ -62,6 +62,9 @@ The API connects to a postgres database. As a first step, it is necessary to cre
 `npm i db-migrate migrate-pg`
 
 `npx db-migrate create users-table --sql-file`
+`npx db-migrate create products-table --sql-file`
+`npx db-migrate create orders-table --sql-file`
+`npx db-migrate create orders-products-table --sql-file`
 
 # Database Schema
 
