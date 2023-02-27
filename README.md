@@ -4,8 +4,8 @@
 
 This is a part of Udacity Nanodgree for developing a backend server with the Following technologies (Postgres,db-migrate , dotenv , express, jsonwebtoken , Node js , TypeScript ,Jasmine Unit Test, supertest )
 
-1-`yarn` or `npm install` to insatll project dependencies.
-2- `npm run dev` to start the server on port 5555
+1-`yarn` or `npm install` to insatll project dependencies.  
+2- `npm run dev` to start the server on port 5555  
 3- Env Variables as the following :
 
 ## ENV VARIABLES EXAMPLES
@@ -61,9 +61,9 @@ The API connects to a postgres database. As a first step, it is necessary to cre
 
 `npm i db-migrate migrate-pg`
 
-`npx db-migrate create users-table --sql-file`
-`npx db-migrate create products-table --sql-file`
-`npx db-migrate create orders-table --sql-file`
+`npx db-migrate create users-table --sql-file`  
+`npx db-migrate create products-table --sql-file`  
+`npx db-migrate create orders-table --sql-file`  
 `npx db-migrate create orders-products-table --sql-file`
 
 # Database Schema
